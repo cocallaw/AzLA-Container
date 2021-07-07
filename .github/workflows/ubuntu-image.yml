@@ -13,7 +13,7 @@ jobs:
     # Set job outputs to values from filter step
     outputs:
       ubuntulatest: ${{ steps.filter.outputs.ubuntulatest }}
-      ubuntu314: ${{ steps.filter.outputs.ubuntu1804 }}
+      ubuntu1804: ${{ steps.filter.outputs.ubuntu1804 }}
     steps:
     - name: Checkout Code
       uses: actions/checkout@v2
@@ -23,9 +23,9 @@ jobs:
       with:
         filters: |
           ubuntulatest:
-            - 'ubuntu-Latest/**'
-          ubuntu314:
-            - 'ubuntu-18-04/**'
+            - 'Ubuntu-Latest/**'
+          ubuntu1804:
+            - 'Ubuntu-18-04/**'
 
   ubuntulatestbuild:
     needs: changes
