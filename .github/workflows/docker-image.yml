@@ -7,14 +7,43 @@ on:
     branches: [ main ]
 
 jobs:
+  # JOB to run change detection
+  changes:
+    runs-on: ubuntu-latest
+    # Set job outputs to values from filter step
+    outputs:
+      alpinelatest: ${{ steps.filter.outputs.alpinelatest }}
+      alpine314: ${{ steps.filter.outputs.alpine314 }}
+    steps:
+    # For pull requests it's not necessary to checkout the code
+    - uses: dorny/paths-filter@v2
+      id: filter
+      with:
+        filters: |
+          alpinelatest:
+            - 'Alpine-Latest/**'
+          alpine314:
+            - 'Alpine-3-14/**'
 
-  build:
-
+  alpinelatestbuild:
+    needs: changes
+    if: ${{ needs.changes.outputs.alpinelatest == 'true' }}
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Alpine-Latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      
+  alpine314build:
+    needs: changes
+    if: ${{ needs.changes.outputs.alpine314 == 'true' }}
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: Alpine-3-14
-
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
