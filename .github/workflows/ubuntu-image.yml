@@ -1,0 +1,52 @@
+name: Ubuntu Image Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # JOB to run change detection
+  changes:
+    runs-on: ubuntu-latest
+    # Set job outputs to values from filter step
+    outputs:
+      ubuntulatest: ${{ steps.filter.outputs.ubuntulatest }}
+      ubuntu314: ${{ steps.filter.outputs.ubuntu1804 }}
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+    # For pull requests it's not necessary to checkout the code
+    - uses: dorny/paths-filter@v2
+      id: filter
+      with:
+        filters: |
+          ubuntulatest:
+            - 'ubuntu-Latest/**'
+          ubuntu314:
+            - 'ubuntu-18-04/**'
+
+  ubuntulatestbuild:
+    needs: changes
+    if: ${{ needs.changes.outputs.ubuntulatest == 'true' }}
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Ubuntu-Latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      
+  ubuntu1804build:
+    needs: changes
+    if: ${{ needs.changes.outputs.ubuntu1804 == 'true' }}
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Ubuntu-18-04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
