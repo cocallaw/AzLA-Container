@@ -6,9 +6,9 @@ ARG workspace_key
 ENV wkey ${workspace_key}
 
 RUN mkdir /opt/la && \
-    apt update && \ 
-    apt upgrade && \
-    apt clean
+    apt update -y && \ 
+    apt upgrade -y && \
+    apt clean -y
 
 COPY ubiquiti.conf /opt/la/
 
