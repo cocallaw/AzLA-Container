@@ -15,6 +15,8 @@ jobs:
       alpinelatest: ${{ steps.filter.outputs.alpinelatest }}
       alpine314: ${{ steps.filter.outputs.alpine314 }}
     steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
     # For pull requests it's not necessary to checkout the code
     - uses: dorny/paths-filter@v2
       id: filter
