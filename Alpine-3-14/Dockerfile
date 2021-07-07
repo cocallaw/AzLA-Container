@@ -5,9 +5,7 @@ ENV wid ${workspace_id}
 ARG workspace_key
 ENV wkey ${workspace_key}
 
-RUN mkdir /opt/la && \
-    apk update && \ 
-    apk upgrade --available
+RUN mkdir /opt/la && apk update && apk upgrade --available
 
 # Copy the ubiquiti.conf file
 COPY ubiquiti.conf /opt/la/
