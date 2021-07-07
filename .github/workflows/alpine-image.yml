@@ -37,10 +37,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag alpinelatest-la:$(date +%s)
+      run: docker build . --file Dockerfile --tag alpinelatest-la:latest
     - uses: azure/container-scan@v0.1
       with:
-        image-name: alpinelatest-la:$(date +%s)
+        image-name: alpinelatest-la:latest
       
   alpine314build:
     needs: changes
@@ -52,7 +52,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag alpine-3-14:$(date +%s)
+      run: docker build . --file Dockerfile --tag alpine-3-14:latest
     - uses: azure/container-scan@v0.1
       with:
-        image-name: alpine-3-14:$(date +%s)
+        image-name: alpine-3-14:latest
