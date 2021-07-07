@@ -1,5 +1,10 @@
 FROM ubuntu:latest
 
+ARG workspace_id
+ENV wid ${workspace_id}
+ARG workspace_key
+ENV wkey ${workspace_key}
+
 RUN mkdir /opt/la && \
     apt update && \ 
     apt upgrade && \
