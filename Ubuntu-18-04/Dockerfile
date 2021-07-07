@@ -8,6 +8,7 @@ ENV wkey ${workspace_key}
 RUN mkdir /opt/la && \
     apt update -y && \ 
     apt upgrade -y && \
+    apt install wget -y && \
     apt clean -y
 
 COPY ubiquiti.conf /opt/la/
