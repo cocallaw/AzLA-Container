@@ -5,6 +5,8 @@ ENV wid ${workspace_id}
 ARG workspace_key
 ENV wkey ${workspace_key}
 
+EXPOSE 25224/tcp
+
 RUN mkdir /opt/la && apk update && apk upgrade --available
 
 COPY ubiquiti.conf /opt/la/
