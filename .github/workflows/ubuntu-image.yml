@@ -37,7 +37,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build . --file Dockerfile --tag ubuntulatest-la:latest
+    - uses: azure/container-scan@v0.1
+      with:
+        image-name: ubuntulatest-la:latest
       
   ubuntu1804build:
     needs: changes
@@ -49,4 +52,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build . --file Dockerfile --tag ubuntu-18-04:latest
+    - uses: azure/container-scan@v0.1
+      with:
+        image-name: ubuntu-18-04:latest
