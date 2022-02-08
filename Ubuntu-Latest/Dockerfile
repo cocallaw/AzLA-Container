@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:latest
 
 ARG workspace_id
 ENV wid ${workspace_id}
