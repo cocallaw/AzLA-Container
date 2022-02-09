@@ -37,7 +37,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag alpinelatest-la:latest
+      run: docker build . --file Dockerfile --tag alpinelatest-la:latest --build-arg workspace_id=a_value --build-arg workspace_key=b_value
     - uses: azure/container-scan@v0.1
       with:
         image-name: alpinelatest-la:latest
@@ -52,7 +52,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag alpine-3-14:latest
+      run: docker build . --file Dockerfile --tag alpine-3-14:latest --build-arg workspace_id=a_value --build-arg workspace_key=b_value
     - uses: azure/container-scan@v0.1
       with:
         image-name: alpine-3-14:latest
