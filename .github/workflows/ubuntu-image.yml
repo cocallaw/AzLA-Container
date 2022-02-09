@@ -37,7 +37,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ubuntulatest-la:latest
+      run: docker build . --file Dockerfile --tag ubuntulatest-la:latest --build-arg workspace_id=a_value --build-arg workspace_key=b_value
     - uses: azure/container-scan@v0.1
       with:
         image-name: ubuntulatest-la:latest
@@ -52,7 +52,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ubuntu-18-04:latest
+      run: docker build . --file Dockerfile --tag ubuntu-18-04:latest --build-arg workspace_id=a_value --build-arg workspace_key=b_value
     - uses: azure/container-scan@v0.1
       with:
         image-name: ubuntu-18-04:latest
