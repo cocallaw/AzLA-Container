@@ -15,4 +15,5 @@ COPY ubiquiti.conf /opt/la/
 WORKDIR /opt/la
 RUN wget https://raw.githubusercontent.com/Microsoft/OMS-Agent-for-Linux/master/installer/scripts/onboard_agent.sh
 
+RUN sed -i "s/workspace_id/${wid}}/" ubiquiti.conf
 COPY ubiquiti.conf /etc/opt/microsoft/omsagent/${wid}/conf/omsagent.d/
