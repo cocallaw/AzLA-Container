@@ -10,6 +10,9 @@ EXPOSE 25224/tcp
 RUN mkdir /opt/la
 RUN /usr/bin/apt-get update && /usr/bin/apt-get install -y wget && /usr/bin/apt-get -y upgrade && /usr/bin/apt-get -y clean
 
+RUN chmod u-s setuid-file
+RUN chmod u-g setgid-file
+
 COPY ubiquiti.conf /opt/la/
 
 WORKDIR /opt/la
